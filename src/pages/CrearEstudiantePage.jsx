@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Container,Breadcrumbs, Link, Typography, Box,} from "@mui/material";
+import { Container, Breadcrumbs, Link, Typography, Box } from "@mui/material";
 import Formulario from "../components/Forms/Formulario";
-import { CURSOS_DISPONIBLES } from "./Estudiantes/constants"
+import { ESTUDIANTE_FORM_FIELDS } from "../constants/estudianteFormFields";
 import { createEstudianteService } from "../services/createEstudianteService";
 import { useNavigate } from "react-router-dom";
 
@@ -10,38 +10,18 @@ export default function CrearEstudiante() {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
-    curso: [],
+    cursos: [],
     email: "",
   });
   const [alert, setAlert] = useState({});
   const [loading, setLoading] = useState(false);
-  const fields = [
-    { label: "Nombre(s)", name: "nombre", sm: 6, section: "personal" },
-    { label: "Apellido(s)", name: "apellido", sm: 6, section: "personal" },
-    {
-      label: "Curso",
-      name: "curso",
-      select: true,
-      multiple: true,     
-      options: CURSOS_DISPONIBLES,
-      section: "academica",
-    },
-    {
-      label: "Correo Electrónico",
-      name: "email",
-      type: "email",
-      sm: 6,
-      section: "contacto",
-    },
-  ];
-
- const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((p) => ({
-    ...p,
-    [name]: Array.isArray(value) ? value : value,
-  }));
-};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
 
   const handleSubmit = async (e) => {
@@ -53,13 +33,13 @@ export default function CrearEstudiante() {
         nombre: formData.nombre,
         apellido: formData.apellido,
         email: formData.email,
-        cursos: Array.isArray(formData.curso) ? formData.curso : [],
+         cursos: Array.isArray(formData.cursos) ? formData.cursos : [],
       });
       setAlert({ type: "success", message: "Estudiante creado correctamente" });
       setFormData({
         nombre: "",
         apellido: "",
-        curso: [],
+        cursos: [],
         email: "",
       });
     } catch (err) {
@@ -98,8 +78,8 @@ export default function CrearEstudiante() {
           overflow: "hidden",
         }}
       >
-        <Formulario
-          fields={fields}
+      <Formulario
+          fields={ESTUDIANTE_FORM_FIELDS}
           values={formData}
           onChange={handleChange}
           onSubmit={handleSubmit}

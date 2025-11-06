@@ -9,15 +9,35 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router-dom";
-import DetalleEstudianteHeader from "./components/DetalleEstudianteHeader"
+import DetalleEstudianteHeader from "./components/DetalleEstudianteHeader";
 import DetalleEstudianteInformacion from "./components/DetalleEstudianteInformacion";
 import DetalleEstudianteCursos from "./components/DetalleEstudianteCursos";
 import { useDetalleEstudiante } from "./Hooks/useDetalleEstudiante";
+import EditarEstudianteModal from "../../components/Modals/EditarEstudianteModal"
+import { useEditarEstudianteModal } from "../../hooks/useEditarEstudianteModal";
 
 export default function DetalleEstudiante() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { estudiante, loading, error } = useDetalleEstudiante(id);
+  const { estudiante, loading, error, actualizarEstudiante } = useDetalleEstudiante(id);
+  const {
+    open: isEditOpen,
+    values: editValues,
+    alert: editAlert,
+    saving: editSaving,
+    openModal: openEditModal,
+    closeModal: closeEditModal,
+    handleChange: handleEditChange,
+    handleSubmit: handleEditSubmit,
+  } = useEditarEstudianteModal({
+    onSuccess: actualizarEstudiante,
+  });
+
+  const handleEditar = () => {
+    if (estudiante) {
+      openEditModal(estudiante);
+    }
+  };
 
   const mostrarContenido = !loading && !error && Boolean(estudiante);
 
@@ -80,7 +100,10 @@ export default function DetalleEstudiante() {
 
         {mostrarContenido && (
           <>
-            <DetalleEstudianteHeader estudiante={estudiante} />
+           <DetalleEstudianteHeader
+              estudiante={estudiante}
+              onEditar={handleEditar}
+            />
             <Divider sx={{ mb: "1rem" }} />
             <DetalleEstudianteInformacion estudiante={estudiante} />
             <Divider sx={{ mb: "1rem" }} />
@@ -94,6 +117,15 @@ export default function DetalleEstudiante() {
           </Typography>
         )}
       </Card>
+     <EditarEstudianteModal
+        open={isEditOpen}
+        values={editValues}
+        alert={editAlert}
+        saving={editSaving}
+        onChange={handleEditChange}
+        onSubmit={handleEditSubmit}
+        onClose={closeEditModal}
+      />
     </Box>
   );
 }

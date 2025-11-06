@@ -17,7 +17,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-export default function TableDesktop({ estudiantes,total, getColorByCourse,pagina,totalPaginas,onPrev,onNext}) {
+export default function TableDesktop({
+  estudiantes,
+  total,
+  getColorByCourse,
+  pagina,
+  totalPaginas,
+  onPrev,
+  onNext,
+  onEdit,
+}) {
   return (
     <Paper
       elevation={0}
@@ -86,7 +95,11 @@ export default function TableDesktop({ estudiantes,total, getColorByCourse,pagin
                     >
                       <VisibilityIcon fontSize="small" />
                     </IconButton>
-                    <IconButton size="small" aria-label="editar">
+                   <IconButton
+                      size="small"
+                      aria-label="editar"
+                      onClick={() => onEdit?.(est)}
+                    >
                       <EditIcon fontSize="small" />
                     </IconButton>
                     <IconButton size="small" color="error" aria-label="eliminar">

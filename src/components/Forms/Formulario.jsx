@@ -48,7 +48,7 @@ export default function Formulario({fields,values,
                           id={fieldId}
                           name={field.name}
                           label={field.label}
-                          multiple={field.multiple || false} // 👈 agrega soporte multiple
+                          multiple={field.multiple || false}
                           value={
                             values[field.name] ?? (field.multiple ? [] : "")
                           }

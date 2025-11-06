@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { isAxiosError } from "axios";
 import { getEstudiantePorId } from "../../../services/getEstudiantePorIdService";
 
@@ -57,5 +57,10 @@ export function useDetalleEstudiante(id) {
     };
   }, [id]);
 
-  return { estudiante, loading, error };
+  const actualizarEstudiante = useCallback((patch) => {
+    if (!patch) return;
+    setEstudiante((prev) => (prev ? { ...prev, ...patch } : prev));
+  }, []);
+
+  return { estudiante, loading, error, actualizarEstudiante };
 }

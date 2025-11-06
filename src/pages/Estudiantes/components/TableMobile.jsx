@@ -20,6 +20,7 @@ export default function TableMobile({
   onPrev,
   onNext,
   getColorByCourse,
+  onEdit,
 }) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -82,7 +83,7 @@ export default function TableMobile({
                 >
                   <VisibilityIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small">
+                <IconButton size="small" onClick={() => onEdit?.(est)}>
                   <EditIcon fontSize="small" />
                 </IconButton>
                 <IconButton size="small" color="error">

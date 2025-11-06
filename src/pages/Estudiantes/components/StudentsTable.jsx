@@ -2,20 +2,20 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TableDesktop from "./TableDesktop";
 import TableMobile from "./TableMobile";
-
 export default function StudentsTable({
- estudiantes,
+  estudiantes,
   total,
   pagina,
   totalPaginas,
   onPrev,
   onNext,
   getColorByCourse,
+  onEdit,
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-   const props = {
+  const props = {
     estudiantes,
     total,
     pagina,
@@ -23,7 +23,8 @@ export default function StudentsTable({
     onPrev,
     onNext,
     getColorByCourse,
+    onEdit,
   };
 
-    return isMobile ? <TableMobile {...props} /> : <TableDesktop {...props} />;
+  return isMobile ? <TableMobile {...props} /> : <TableDesktop {...props} />;
 }
