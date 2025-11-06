@@ -88,11 +88,11 @@ src/
 
 ## Capturas
 
-###Vista Principal.
+### Vista Principal.
 <img width="1258" height="596" alt="image" src="https://github.com/user-attachments/assets/6e6ea823-3167-40e9-ba9c-93fefcf9964c" />
 
-###Desktop
+### Desktop
 <img width="1240" height="604" alt="image" src="https://github.com/user-attachments/assets/1232818d-26a5-494c-840c-f9dcd5fc97ad" />
 
-###Mobile
+### Mobile
 <img width="521" height="587" alt="image" src="https://github.com/user-attachments/assets/766bde5e-7c53-4068-98a7-708e36e16d3f" />
