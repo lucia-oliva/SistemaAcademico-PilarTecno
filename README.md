@@ -1,16 +1,89 @@
-# React + Vite
+# Sistema Académico Pilar Tecno
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema Académico Pilar Tecno es una aplicación web desarrollada con React + Vite y Material UI, pensada para gestionar los estudiantes de manera moderna, accesible y fácil de mantener.
+Permite listar, filtrar, crear, editar y eliminar estudiantes desde una interfaz responsiva basada en componentes reutilizables.
 
-Currently, two official plugins are available:
+## Características principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Listado dinámico de estudiantes** con filtros por curso, búsqueda en vivo y paginación adaptable a diferentes resoluciones.
+- **Vista de detalle** con información ampliada de cada estudiante, cursos inscriptos y acciones rápidas.
+- **Edición en modales** con estados de carga y mensajes de confirmación para garantizar una experiencia fluida.
+- **Eliminación segura** mediante diálogos de confirmación y manejo de errores controlado.
+- **Diseño 100% responsivo** (tabla enriquecida en desktop y tarjetas interactivas en mobile).
 
-## React Compiler
+## Tecnologías utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Tipo | Tecnología |
+| ---- | ---------- |
+| Framework | React 19 + Vite |
+| UI Library | Material UI 7 + Emotion |
+| Ruteo | React Router DOM v7 |
+| Estado Global | React Context + useReducer |
+| Solicitudes HTTP | Axios |
+| Fuentes | @fontsource/roboto |
 
-## Expanding the ESLint configuration
+## Estructura principal
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── App.jsx
+├── components/
+│   ├── Layout.jsx
+│   ├── Header.jsx
+│   ├── Sidebar.jsx
+│   ├── Forms/
+│   │   └── Formulario.jsx
+│   ├── Modals/
+│   │   ├── ConfirmDeleteModal.jsx
+│   │   └── EditarEstudianteModal.jsx
+│   └── UI/
+│       └── Alertas.jsx
+├── constants/
+│   └── estudianteFormFields.js
+├── context/
+│   ├── EstudiantesContex.js
+│   ├── EstudiantesProvider.jsx
+│   ├── useEstudiantes.js
+│   └── reducers/
+│       └── estudiantesReducer.js
+├── hooks/
+│   ├── useEditarEstudianteModal.js
+│   └── useEliminarEstudianteModal.js
+├── pages/
+│   ├── Home.jsx
+│   ├── CrearEstudiantePage.jsx
+│   ├── DetalleEstudiante/
+│   │   ├── DetalleEstudiantePage.jsx
+│   │   ├── components/
+│   │   └── Hooks/
+│   └── Estudiantes/
+│       ├── PageEstudiantes.jsx
+│       ├── components/
+│       ├── constants.js
+│       └── hooks/
+├── services/
+│   ├── createEstudianteService.js
+│   ├── deleteEstudianteService.js
+│   ├── getEstudiantesService.js
+│   ├── getEstudiantePorIdService.js
+│   └── updateEstudianteService.js
+├── styles/
+│   └── App.css
+├── theme.js
+└── main.jsx
+```
+
+## Configuración del proyecto
+
+//esperar a subir a vercel
+
+## Rutas principales
+
+| Ruta | Descripción |
+| ---- | ----------- |
+| `/` | Portada con acceso al gestor académico |
+| `/estudiantes` | Listado principal con filtros, búsqueda y paginación |
+| `/estudiantes/crear` | Alta de nuevos estudiantes mediante formulario guiado |
+| `/estudiantes/:id` | Detalle individual con información extendida y acciones |
+
+## Capturas
