@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Layout from "./components/Layout";
 import PageEstudiantes from './pages/Estudiantes/PageEstudiantes';
 import CrearEstudiante from './pages/CrearEstudiantePage';
+import EstudianteDetalle from './pages/DetalleEstudiantePage';
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
          <Route element={<Layout/>}>
         <Route path="/" element={<Home />} />
         <Route path="/estudiantes" element={<PageEstudiantes />} />
-          <Route path="/estudiantes/crear" element={<CrearEstudiante />} />
+        <Route path="/estudiantes/crear" element={<CrearEstudiante />} />
+        <Route path="/estudiantes/:id" element={<EstudianteDetalle />} />
         </Route>
       </Routes>
     </BrowserRouter>
