@@ -11,7 +11,15 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function TableMobile({ estudiantes, total, getColorByCourse }) {
+export default function TableMobile({
+  estudiantes,
+  total,
+  pagina,
+  totalPaginas,
+  onPrev,
+  onNext,
+  getColorByCourse,
+}) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       {estudiantes.length === 0 ? (
@@ -42,7 +50,13 @@ export default function TableMobile({ estudiantes, total, getColorByCourse }) {
               gap: "0.75rem",
             }}
           >
-            <Box sx={{ display: "flex", justifyContent: "space-between", gap: "0.5rem" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "0.5rem",
+              }}
+            >
               <Box>
                 <Typography sx={{ fontWeight: 600 }}>
                   {est.nombre} {est.apellido}
@@ -50,7 +64,11 @@ export default function TableMobile({ estudiantes, total, getColorByCourse }) {
                 <Typography variant="caption" color="text.secondary">
                   {est.email}
                 </Typography>
-                <Typography variant="caption" color="text.disabled" display="block">
+                <Typography
+                  variant="caption"
+                  color="text.disabled"
+                  display="block"
+                >
                   ID: {est._id.slice(0, 6)}...
                 </Typography>
               </Box>
@@ -84,18 +102,30 @@ export default function TableMobile({ estudiantes, total, getColorByCourse }) {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          mt: "0.5rem",
+          p: "0.75rem 1rem",
+          flexWrap: "wrap",
+          gap: "0.5rem",
         }}
       >
         <Typography variant="caption" color="text.secondary">
-          Mostrando {estudiantes.length} de {total} estudiantes
+          Página {pagina} de {totalPaginas} — Mostrando {estudiantes.length} de{" "}
+          {total}
         </Typography>
         <Box sx={{ display: "flex", gap: "0.5rem" }}>
-          <Button size="small" variant="outlined">
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onPrev}
+            disabled={pagina === 1}
+          >
             Anterior
           </Button>
-          <Button size="small" variant="outlined">
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onNext}
+            disabled={pagina === totalPaginas}
+          >
             Siguiente
           </Button>
         </Box>

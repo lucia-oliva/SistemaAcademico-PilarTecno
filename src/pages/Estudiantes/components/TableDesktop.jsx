@@ -16,7 +16,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function TableDesktop({ estudiantes, total, getColorByCourse }) {
+export default function TableDesktop({ estudiantes,total, getColorByCourse,pagina,totalPaginas,onPrev,onNext}) {
   return (
     <Paper
       elevation={0}
@@ -93,7 +93,7 @@ export default function TableDesktop({ estudiantes, total, getColorByCourse }) {
           </TableBody>
         </Table>
       </Box>
-      <Box
+       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -102,14 +102,25 @@ export default function TableDesktop({ estudiantes, total, getColorByCourse }) {
           gap: "0.5rem",
         }}
       >
-        <Typography variant="caption" color="text.secondary">
-          Mostrando {estudiantes.length} de {total} estudiantes
+         <Typography variant="caption" color="text.secondary">
+          Página {pagina} de {totalPaginas} — Mostrando {estudiantes.length} de{" "}
+          {total}
         </Typography>
-        <Box sx={{ display: "flex", gap: "0.5rem" }}>
-          <Button size="small" variant="outlined">
+       <Box sx={{ display: "flex", gap: "0.5rem" }}>
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onPrev}
+            disabled={pagina === 1}
+          >
             Anterior
           </Button>
-          <Button size="small" variant="outlined">
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={onNext}
+            disabled={pagina === totalPaginas}
+          >
             Siguiente
           </Button>
         </Box>

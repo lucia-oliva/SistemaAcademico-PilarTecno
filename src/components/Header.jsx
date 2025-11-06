@@ -40,7 +40,7 @@ function Header({ onOpenMenu }) {
             Estudiantes
           </Button>
           <Button
-            onClick={() => navigate("/estudiantes/nuevo")}
+            onClick={() => navigate("/estudiantes/crear")}
             sx={{ textTransform: "none" }}
           >
             Nuevo

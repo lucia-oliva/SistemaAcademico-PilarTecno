@@ -69,7 +69,7 @@ function SideBar({ open, onClose }) {
             <ListItemText primary="Estudiantes" />
           </ListItemButton>
 
-          <ListItemButton onClick={() => handleGo("/estudiantes/nuevo")}>
+          <ListItemButton onClick={() => handleGo("/estudiantes/crear")}>
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>
