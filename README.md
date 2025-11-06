@@ -75,7 +75,31 @@ src/
 
 ## Configuración del proyecto
 
-//esperar a subir a vercel
+1.Clonar el repositorio
+```bash
+git clone https://github.com/tuusuario/tuproject.git
+cd tuproject
+```
+2.Instalar dependencias
+```bash
+npm install
+```
+3.Configurar variables de entorno
+
+Crear un archivo .env en la raíz del proyecto con el siguiente contenido:
+```bash
+VITE_API_URL=https://tu-api.vercel.app
+```
+4.Ejecutar el proyecto en modo desarrollo
+```bash
+npm run dev
+```
+El servidor local se iniciará en
+http://localhost:5173
+
+##Versión en producción
+
+El proyecto se encuentra desplegado en Vercel Aqui: https://sistema-academico-pilar-tecno.vercel.app/
 
 ## Rutas principales
 
