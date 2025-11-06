@@ -18,6 +18,7 @@ export default function StudentsListSection({
   onNext,
   getColorByCourse,
   onEdit,
+  onDelete,
 }) {
   return (
     <>
@@ -43,11 +44,12 @@ export default function StudentsListSection({
           total={total}
           pagina={pagina}
           totalPaginas={totalPaginas}
-          onPrev={onPrev}
-          onNext={onNext}
-          getColorByCourse={getColorByCourse}
-          onEdit={onEdit}
-        />
+            onPrev={onPrev}
+            onNext={onNext}
+            getColorByCourse={getColorByCourse}
+            onEdit={onEdit}
+            onDelete={onDelete}
+      />
       )}
     </>
   );

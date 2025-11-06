@@ -13,13 +13,15 @@ import DetalleEstudianteHeader from "./components/DetalleEstudianteHeader";
 import DetalleEstudianteInformacion from "./components/DetalleEstudianteInformacion";
 import DetalleEstudianteCursos from "./components/DetalleEstudianteCursos";
 import { useDetalleEstudiante } from "./Hooks/useDetalleEstudiante";
-import EditarEstudianteModal from "../../components/Modals/EditarEstudianteModal"
+import EditarEstudianteModal from "../../components/Modals/EditarEstudianteModal";
+import ConfirmDeleteModal from "../../components/Modals/ConfirmDeleteModal";
 import { useEditarEstudianteModal } from "../../hooks/useEditarEstudianteModal";
+import { useEliminarEstudianteModal } from "../../hooks/useEliminarEstudianteModal";
 
 export default function DetalleEstudiante() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { estudiante, loading, error, actualizarEstudiante } = useDetalleEstudiante(id);
+ const { estudiante, loading, error, actualizarEstudiante } = useDetalleEstudiante(id);
   const {
     open: isEditOpen,
     values: editValues,
@@ -28,9 +30,20 @@ export default function DetalleEstudiante() {
     openModal: openEditModal,
     closeModal: closeEditModal,
     handleChange: handleEditChange,
-    handleSubmit: handleEditSubmit,
+   handleSubmit: handleEditSubmit,
   } = useEditarEstudianteModal({
     onSuccess: actualizarEstudiante,
+  });
+  const {
+    open: isDeleteOpen,
+    estudiante: estudianteToDelete,
+    loading: deleteLoading,
+    error: deleteError,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+    handleConfirm: handleDeleteConfirm,
+  } = useEliminarEstudianteModal({
+    onSuccess: () => navigate("/estudiantes"),
   });
 
   const handleEditar = () => {
@@ -39,8 +52,20 @@ export default function DetalleEstudiante() {
     }
   };
 
+  const handleEliminar = () => {
+    if (estudiante) {
+      openDeleteModal(estudiante);
+    }
+  };
+
   const mostrarContenido = !loading && !error && Boolean(estudiante);
 
+  const nombreEstudianteEliminar = estudianteToDelete
+    ? `${estudianteToDelete.nombre ?? ""} ${estudianteToDelete.apellido ?? ""}`.trim() ||
+      estudianteToDelete.email ||
+      estudianteToDelete._id
+    : "este estudiante";
+    
   return (
     <Box
       sx={{
@@ -103,6 +128,7 @@ export default function DetalleEstudiante() {
            <DetalleEstudianteHeader
               estudiante={estudiante}
               onEditar={handleEditar}
+              onEliminar={handleEliminar}
             />
             <Divider sx={{ mb: "1rem" }} />
             <DetalleEstudianteInformacion estudiante={estudiante} />
@@ -125,6 +151,17 @@ export default function DetalleEstudiante() {
         onChange={handleEditChange}
         onSubmit={handleEditSubmit}
         onClose={closeEditModal}
+      />
+      <ConfirmDeleteModal
+        open={isDeleteOpen}
+        title="Eliminar estudiante"
+        description={`¿Deseas eliminar a ${nombreEstudianteEliminar}? Esta acción no se puede deshacer.`}
+        loading={deleteLoading}
+        error={deleteError}
+        onClose={closeDeleteModal}
+        onConfirm={handleDeleteConfirm}
+        confirmLabel="Eliminar"
+        cancelLabel="Cancelar"
       />
     </Box>
   );

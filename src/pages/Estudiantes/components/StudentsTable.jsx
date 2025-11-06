@@ -11,6 +11,7 @@ export default function StudentsTable({
   onNext,
   getColorByCourse,
   onEdit,
+  onDelete,
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -19,11 +20,12 @@ export default function StudentsTable({
     estudiantes,
     total,
     pagina,
-    totalPaginas,
+     totalPaginas,
     onPrev,
     onNext,
     getColorByCourse,
     onEdit,
+    onDelete,
   };
 
   return isMobile ? <TableMobile {...props} /> : <TableDesktop {...props} />;

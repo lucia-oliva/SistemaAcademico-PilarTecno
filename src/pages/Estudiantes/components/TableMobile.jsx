@@ -21,6 +21,7 @@ export default function TableMobile({
   onNext,
   getColorByCourse,
   onEdit,
+  onDelete,
 }) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -86,7 +87,12 @@ export default function TableMobile({
                 <IconButton size="small" onClick={() => onEdit?.(est)}>
                   <EditIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small" color="error">
+               <IconButton
+                  size="small"
+                  color="error"
+                  onClick={() => onDelete?.(est)}
+                  aria-label="eliminar"
+                >
                   <DeleteIcon fontSize="small" />
                 </IconButton>
               </Box>

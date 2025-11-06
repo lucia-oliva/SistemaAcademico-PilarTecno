@@ -22,10 +22,11 @@ export default function TableDesktop({
   total,
   getColorByCourse,
   pagina,
-  totalPaginas,
+   totalPaginas,
   onPrev,
   onNext,
   onEdit,
+  onDelete,
 }) {
   return (
     <Paper
@@ -102,7 +103,12 @@ export default function TableDesktop({
                     >
                       <EditIcon fontSize="small" />
                     </IconButton>
-                    <IconButton size="small" color="error" aria-label="eliminar">
+                   <IconButton
+                      size="small"
+                      color="error"
+                      aria-label="eliminar"
+                      onClick={() => onDelete?.(est)}
+                    >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </TableCell>
