@@ -15,6 +15,7 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
 
 export default function TableDesktop({ estudiantes,total, getColorByCourse,pagina,totalPaginas,onPrev,onNext}) {
   return (
@@ -77,7 +78,12 @@ export default function TableDesktop({ estudiantes,total, getColorByCourse,pagin
                   </TableCell>
 
                   <TableCell align="right">
-                    <IconButton size="small" aria-label="ver">
+                    <IconButton
+                      size="small"
+                      aria-label="ver"
+                      component={Link}
+                      to={`/estudiantes/${est._id}`}
+                    >
                       <VisibilityIcon fontSize="small" />
                     </IconButton>
                     <IconButton size="small" aria-label="editar">
