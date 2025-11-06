@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useCallback } from "react";
 import { EstudiantesContext } from "./EstudiantesContex.js";
 import {
   estudiantesReducer,
@@ -13,26 +13,29 @@ export function EstudiantesProvider({ children }) {
     estudiantesInitialState
   );
 
-  const loadEstudiantes = async (curso = "") => {
-    try {
-      dispatch({ type: ESTUDIANTES_ACTIONS.SET_LOADING, payload: true });
-      const data = await fetchStudents(curso);
-      dispatch({ type: ESTUDIANTES_ACTIONS.SET, payload: data });
-      dispatch({ type: ESTUDIANTES_ACTIONS.SET_ERROR, payload: null });
-    } catch (err) {
-      console.error(err);
-      dispatch({
-        type: ESTUDIANTES_ACTIONS.SET_ERROR,
-        payload: "No se pudieron cargar los estudiantes",
-      });
-    } finally {
-      dispatch({ type: ESTUDIANTES_ACTIONS.SET_LOADING, payload: false });
-    }
-  };
+ const loadEstudiantes = useCallback(
+    async (curso = "") => {
+      try {
+        dispatch({ type: ESTUDIANTES_ACTIONS.SET_LOADING, payload: true });
+        const data = await fetchStudents(curso);
+        dispatch({ type: ESTUDIANTES_ACTIONS.SET, payload: data });
+        dispatch({ type: ESTUDIANTES_ACTIONS.SET_ERROR, payload: null });
+      } catch (err) {
+        console.error(err);
+        dispatch({
+          type: ESTUDIANTES_ACTIONS.SET_ERROR,
+          payload: "No se pudieron cargar los estudiantes",
+        });
+      } finally {
+        dispatch({ type: ESTUDIANTES_ACTIONS.SET_LOADING, payload: false });
+      }
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     loadEstudiantes();
-  }, []);
+  }, [loadEstudiantes]);
 
   const value = {
     estudiantes: state.estudiantes,

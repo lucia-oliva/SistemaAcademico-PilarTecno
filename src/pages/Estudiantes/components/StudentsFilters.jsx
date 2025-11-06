@@ -47,7 +47,7 @@ export default function StudentsFilters({
         <TextField
           size="small"
           fullWidth
-          placeholder="Buscar por nombre, email o ID..."
+          placeholder="Buscar por nombre, email..."
           value={busqueda}
           onChange={(e) => onChangeBusqueda(e.target.value)}
         />

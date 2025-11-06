@@ -1,9 +1,5 @@
-import {Box,Divider,Typography,TextField,
-  Button,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
+import {Box,Divider,Typography,TextField,Button,MenuItem,
+  FormControl,InputLabel,Select,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Alertas from "../UI/Alertas";
@@ -15,12 +11,7 @@ const SECTION_TITLES = {
 };
 
 export default function Formulario({fields,values,
-  onChange,
-  onSubmit,
-  loading,
-  alert,
-  submitLabel = "Guardar",
-  onCancel,
+  onChange,onSubmit,loading,alert,submitLabel = "Guardar",onCancel,
 }) {
   const sections = fields.reduce((acc, field) => {
     const key = field.section || "default";
@@ -96,26 +87,19 @@ export default function Formulario({fields,values,
               })}
             </Grid>
           </Box>
-
           {idx !== arr.length - 1 && <Divider />}
         </Box>
       ))}
       <Divider />
       <Box
         sx={{
-          p: 3,
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: 2,
-        }}
-      >
+          p: 3,display: "flex",justifyContent: "flex-end",gap: 2,}}>
         <Alertas type={alert.type} message={alert.message} duration={4000} />
         <Button
           variant="outlined"
           type="button"
           color="inherit"
-          onClick={onCancel}
-        >
+          onClick={onCancel}>
           Cancelar
         </Button>
         <Button type="submit" variant="contained" disabled={loading}>
